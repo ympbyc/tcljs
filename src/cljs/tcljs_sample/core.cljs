@@ -1,5 +1,5 @@
 (ns tcljs-sample.core
-  (:require-macros [cljs.core.typed :refer [ann check-ns*]]))
+  (:require-macros [cljs.core.typed :refer [ann] :as ct]))
 
 (ann cljs.core/str [Any -> string])
 
@@ -26,18 +26,15 @@
                          [(cljs.core/ISeqable x) -> (U nil x)]))
 
 (ann cljs.core/butlast (All [x]
-                            [(cljs.core/ISeqable x) -> (Seq x)]))
+                            [(cljs.core/ISeqable x) -> (cljs.core/ISeqable x)]))
 
 
 
 
 
 
+(ann xs (cljs.core/ISeqable int))
+(def xs [1 2 3 4 5])
 
-
-
-(ann foo (All [x] [(cljs.core/ISeqable x) -> (U nil x)]))
-
-(defn foo
-  [xs]
-  (first xs))
+(ann t-first (U nil int))
+(def t-first (first xs))

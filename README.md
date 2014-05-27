@@ -1,14 +1,6 @@
-# tcljs-sample
+# tcljs
 
-A Clojure library designed to ... well, that part is up to you.
+Typed ClojureScript core annotation.
 
-## Usage
-
-FIXME
-
-## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+src/clj/tcljs-sample/cljclj     tests the behaviour of core.typed
+src/cljs/tcljs-sample/core.clj  annotates cljs.core functions. doesn't type-check at this stage as some features used in this file seems to be implemented only for clojure.

@@ -7,7 +7,8 @@
                  [org.clojure/core.typed "0.2.48"]
                  [org.clojure/clojurescript "0.0-2202"]]
   :plugins [[lein-typed "0.3.1"]]
-  :source-paths ["src/clojure"
+  :source-paths ["src/clj"
                  "src/cljs"]
   :repositories {"sonatype-oss-public" "https://oss.sonatype.org/content/groups/public/"}
-  :core.typed {:check-cljs [tcljs-sample.core]})
+  :core.typed {:check [tcljs-sample.clj]
+               :check-cljs [tcljs-sample.core]})

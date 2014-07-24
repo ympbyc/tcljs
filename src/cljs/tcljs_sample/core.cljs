@@ -1,40 +1,37 @@
 (ns tcljs-sample.core
-  (:require-macros [cljs.core.typed :refer [ann] :as ct]))
-
-(ann cljs.core/str [Any -> string])
-
-
-(ann cljs.core/+ (Fn [int * -> int]
-                     [number * -> number]))
-(ann cljs.core/- (Fn [int * -> int]
-                     [number * -> number]))
-(ann cljs.core/* (Fn [int * -> int]
-                     [number * -> number]))
-
-(ann cljs.core/symbol? [Any -> boolean])
-(ann cljs.core/compare-symbols [Symbol Symbol -> int])
-
-(ann cljs.core/first (All [x]
-                          [(cljs.core/ISeqable x) -> (U nil x)]))
-
-;;(ann cljs.core/second )
-
-(ann cljs.core/rest (All [x]
-                         [(cljs.core/ISeqable x) -> (U nil x)]))
-
-(ann cljs.core/last (All [x]
-                         [(cljs.core/ISeqable x) -> (U nil x)]))
-
-(ann cljs.core/butlast (All [x]
-                            [(cljs.core/ISeqable x) -> (cljs.core/ISeqable x)]))
+  (:require [cljs.core.typed :refer [Option Any Seqable Map Vec]]
+            [castorocauda.dom :refer [gendom]]
+            [castorocauda.util :refer [dom-ready q-select]])
+  (:require-macros [cljs.core.typed :refer [ann]]))
 
 
+(ann todos (Atom (Vec (Map Keyword Any)) (Vec (Map Keyword Any))))
+(def todos (atom [{:memo "create sample project using tcljs"}]))
+
+(ann vdom (Atom Any Any))
+(def vdom (atom []))
 
 
+(ann render-todo-list [(Vec (Map Keyword Any)) -> Any])
+(defn render-todo-list [todos]
+  [:div
+   (map (fn [todo]
+          [:div.todo-item [:span (:memo todo)]])
+        todos)])
 
+(dom-ready
+ (fn []
+   (swap! vdom gendom
+          (render-todo-list @todos)
+          (q-select "#todos")
+          true)
 
-(ann xs (cljs.core/ISeqable int))
-(def xs [1 2 3 4 5])
-
-(ann t-first (U nil int))
-(def t-first (first xs))
+   (.addEventListener
+    (q-select "#todo-in") "keydown"
+    (fn [e] (when (= (.-which e) 13)
+             (swap! todos conj {:memo (.-value (.-target e))})
+             (set! (.-value (.-target e)) "")
+             (swap! vdom gendom
+                    (render-todo-list @todos)
+                    (q-select "#todos")
+                    true))))))

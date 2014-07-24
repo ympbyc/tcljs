@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>typed cljs sample project</title>
+    <script src="js/main.js"></script>
+
+    <style>
+      * { margin: 0; padding: 0; }
+      body {
+        background: rgba(218,218,205,0.8);
+        margin: 0;
+        padding: 0;
+        font-family: Palatino, serif;
+      }
+      #main {
+        width: 400px;
+        height: 100%;
+        margin: 0 auto;
+        background: #f9f9f9;
+        min-height: 800px;
+        text-align: center;
+        padding: 20px 0;
+      }
+      h2 { font-size: 0.8em; color: #3f3f3f; }
+      #main-title { margin: 0 0 20px 0; }
+      #todo-in {
+        width: 94%;
+        font-size: 1.3em;
+        font-weight: 100;
+        color: #3a3a3a;
+      }
+      #todos>div {
+        background: #f9f9f9;
+      }
+      .todo-item {
+        margin: 10px 10px;
+        padding: 10px 20px;
+        border-radius: 2px;
+        background: #fff;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.125);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="main-title">
+        <h1>TODOS</h1>
+        <h2>Append Only Todo List</h2>
+      </div>
+      <div>
+        <input type="text" id="todo-in" />
+      </div>
+      <div id="todos"></div>
+    </div>
+  </body>
+</html>
